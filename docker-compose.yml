@@ -21,6 +21,7 @@ services:
       DB_USER: root
       DB_PASSWORD: rootpass
       DB_NAME: testdb_sql_injection
+      FLASK_HOST: 0.0.0.0
     ports:
       - "127.0.0.1:5000:5000"
 
