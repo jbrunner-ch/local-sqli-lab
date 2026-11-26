@@ -1,0 +1,28 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: sqli_test_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: testdb
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: .
+    container_name: sqli_test_backend
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: rootpass
+      DB_NAME: testdb_sql_injection
+    ports:
+      - "127.0.0.1:5000:5000"
+
+volumes:
+  mysql_data:
